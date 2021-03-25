@@ -1,0 +1,25 @@
+service: CMS #Name of your App
+
+provider:
+  name: aws
+  runtime: nodejs14.x # Node JS version
+  memorySize: 512
+  timeout: 15
+  stage: customer
+  region: ap-south-1 # AWS region
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - http: ANY {proxy+}
+      - http: ANY /
+  # getUser:
+  #   handler: lambda.handler
+  #   events:
+  #     - http: "GET /customer/"
+  #     - http: "GET /customer/{id}"
+  # createUser:
+  #   handler: lambda.handler
+  #   events:
+  #     - http: "POST /customer"
