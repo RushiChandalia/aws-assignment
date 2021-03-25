@@ -1,14 +1,15 @@
 const express = require("express");
-const { getAllCustomers } = require("./controllers/customer/getAllCustomers");
+const { getCustomers } = require("./controllers/customer/getCustomers");
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
 //GET
 app.get("/", async (req, res) => {
   //get all customers
-  const result = await getAllCustomers(req, res);
+  const result = await getCustomers(req, res);
   res.status(200).send(result);
 });
 
