@@ -1,4 +1,6 @@
 const express = require("express");
+const { addCustomer } = require("./controllers/customer/addCustomer");
+const { getCustomerById } = require("./controllers/customer/getCustomerById");
 const { getCustomers } = require("./controllers/customer/getCustomers");
 const app = express();
 
@@ -14,12 +16,15 @@ app.get("/", async (req, res) => {
 });
 
 //GET req Simply sends the current time
-app.get("/:id", (req, res) => {
-  res.status(200).send(`req id ${req.params.id}`);
+app.get("/:id",async (req, res) => {
+  const result = await getCustomerById(req, res);
+  res.status(200).send(result);
 });
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   //ADD CUSTOMER
-  res.status(200).send("/customer request");
+  const result = await addCustomer(req, res);
+  res.status(200).send(result);
+
 });
 
 module.exports = app;
